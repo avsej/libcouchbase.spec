@@ -3,26 +3,25 @@ Name: libcouchbase
 Version: 2.8.1
 Release: 1%{?dist}
 License: ASL 2.0
+BuildRequires: gcc, gcc-c++
 BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(libevent) >= 2
 BuildRequires: libev-devel >= 3
 BuildRequires: openssl-devel
 URL: https://developer.couchbase.com/server/other-products/release-notes-archives/c-sdk
 Source: https://packages.couchbase.com/clients/c/%{name}-%{version}.tar.gz
-%if 0%{?fedora} >= 21
 Recommends: %{name}-libevent%{_isa} = %{version}-%{release}
 Suggests: %{name}-libev%{_isa} = %{version}-%{release}
 Suggests: %{name}-tools%{_isa} = %{version}-%{release}
 
 Patch0: f21-enforce-system-crypto-policies.patch
-%endif
 
 %description
 This package provides the core for libcouchbase. It contains an IO
 implementation based on select(2). If preferred, you can install one
 of the available back-ends (libcouchbase-libevent or libcouchbase-libev).
 libcouchbase will automatically use the installed back-end. It is also
- possible to integrate another IO back-end or write your own.
+possible to integrate another IO back-end or write your own.
 
 %package libevent
 Summary: Couchbase client library - libevent IO back-end
@@ -50,26 +49,23 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 Development files for the Couchbase Client & Protocol Library
 
 %prep
-%setup -q -n %{name}-%{version}
+%autosetup -p1
+
 %cmake -DLCB_NO_MOCK=1 -DLCB_BUILD_LIBUV=OFF
 
-%build
-make %{_smp_mflags} V=1
-
-%install
-make install DESTDIR="%{buildroot}" AM_INSTALL_PROGRAM_FLAGS=""
+%make_build
+%make_install
 
 %check
 make test
 
-%post -n %{name} -p /sbin/ldconfig
-
-%postun -n %{name} -p /sbin/ldconfig
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %{_libdir}/%{name}.so.*
 %doc README.markdown RELEASE_NOTES.markdown
-%license LICENSE 
+%license LICENSE
 
 %files libevent
 %{_libdir}/%{name}_libevent.so

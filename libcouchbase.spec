@@ -9,9 +9,11 @@ BuildRequires: libev-devel >= 3
 BuildRequires: openssl-devel
 URL: https://developer.couchbase.com/server/other-products/release-notes-archives/c-sdk
 Source: https://packages.couchbase.com/clients/c/%{name}-%{version}.tar.gz
+%if 0%{?fedora} >= 21
 Recommends: %{name}-libevent%{_isa} = %{version}-%{release}
 Suggests: %{name}-libev%{_isa} = %{version}-%{release}
 Suggests: %{name}-tools%{_isa} = %{version}-%{release}
+%endif
 
 %description
 This package provides the core for libcouchbase. It contains an IO

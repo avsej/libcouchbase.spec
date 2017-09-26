@@ -18,21 +18,21 @@ Suggests: %{name}-tools%{_isa} = %{version}-%{release}
 %description
 This package provides the core for libcouchbase. It contains an IO
 implementation based on select(2). If preferred, you can install one
-of the available backends (libcouchbase-libevent or libcouchbase-libev).
-libcouchbase will automatically use the installed backend. It is also
- possible to integrate another IO backend or write your own.
+of the available back-ends (libcouchbase-libevent or libcouchbase-libev).
+libcouchbase will automatically use the installed back-end. It is also
+ possible to integrate another IO back-end or write your own.
 
 %package libevent
-Summary: Couchbase client library - libevent backend
+Summary: Couchbase client library - libevent IO back-end
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description libevent
-This package provides libevent backend for libcouchbase
+This package provides libevent back-end for libcouchbase
 
 %package libev
-Summary: Couchbase client library - libev backend
+Summary: Couchbase client library - libev IO back-end
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description libev
-This package provides libev backend for libcouchbase
+This package provides libev back-end for libcouchbase
 
 %package tools
 Summary: Couchbase client tools

@@ -51,13 +51,16 @@ Development files for the Couchbase Client & Protocol Library
 
 %prep
 %setup -q -n %{name}-%{version}
-%cmake -DLCB_NO_TESTS=1 -DLCB_BUILD_LIBUV=OFF
+%cmake -DLCB_NO_MOCK=1 -DLCB_BUILD_LIBUV=OFF
 
 %build
 make %{_smp_mflags} V=1
 
 %install
 make install DESTDIR="%{buildroot}" AM_INSTALL_PROGRAM_FLAGS=""
+
+%check
+make test
 
 %post -n %{name} -p /sbin/ldconfig
 

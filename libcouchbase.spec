@@ -36,7 +36,7 @@ This package provides libev back-end for libcouchbase
 
 %package tools
 Summary: Couchbase client tools
-Requires: %{name} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: %{name}-libevent%{?_isa}
 %description tools
 This is the CLI tools Couchbase project.

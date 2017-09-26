@@ -13,6 +13,8 @@ Source: https://packages.couchbase.com/clients/c/%{name}-%{version}.tar.gz
 Recommends: %{name}-libevent%{_isa} = %{version}-%{release}
 Suggests: %{name}-libev%{_isa} = %{version}-%{release}
 Suggests: %{name}-tools%{_isa} = %{version}-%{release}
+
+Patch0: f21-enforce-system-crypto-policies.patch
 %endif
 
 %description

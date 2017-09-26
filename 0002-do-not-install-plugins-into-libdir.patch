@@ -1,0 +1,63 @@
+From 1816689ab59fb5eb120d044a9f55f67f373ab376 Mon Sep 17 00:00:00 2001
+From: Sergey Avseyev <sergey.avseyev@gmail.com>
+Date: Wed, 27 Sep 2017 02:04:00 +0300
+Subject: [PATCH] Do not install plugins into libdir
+
+Change-Id: I7b669f745ef3b9de8d3874ec160cb070b8c84022
+---
+ cmake/config-cmake.h.in            | 2 +-
+ plugins/io/libev/CMakeLists.txt    | 2 +-
+ plugins/io/libevent/CMakeLists.txt | 2 +-
+ plugins/io/libuv/CMakeLists.txt    | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/cmake/config-cmake.h.in b/cmake/config-cmake.h.in
+index 81128091..f97d8bf5 100644
+--- a/cmake/config-cmake.h.in
++++ b/cmake/config-cmake.h.in
+@@ -56,7 +56,7 @@
+ 
+ #cmakedefine LCB_USE_HDR_HISTOGRAM
+ 
+-#define LCB_LIBDIR "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}"
++#define LCB_LIBDIR "${CMAKE_INSTALL_LIBDIR}/libcouchbase"
+ 
+ #include "config_static.h"
+ #endif
+diff --git a/plugins/io/libev/CMakeLists.txt b/plugins/io/libev/CMakeLists.txt
+index 6eaa62f6..1ad13736 100644
+--- a/plugins/io/libev/CMakeLists.txt
++++ b/plugins/io/libev/CMakeLists.txt
+@@ -26,4 +26,4 @@ ENDIF()
+ 
+ INSTALL(TARGETS
+     couchbase_libev
+-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
++    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/libcouchbase")
+diff --git a/plugins/io/libevent/CMakeLists.txt b/plugins/io/libevent/CMakeLists.txt
+index 1b96a9e3..95ff434b 100644
+--- a/plugins/io/libevent/CMakeLists.txt
++++ b/plugins/io/libevent/CMakeLists.txt
+@@ -22,7 +22,7 @@ IF(LCB_EMBED_PLUGIN_LIBEVENT)
+     SET(LCB_LINK_SPEC "${LCB_LINKS_SPEC} ${LIBEVENT_LIBRARIES}")
+ ELSE()
+     ADD_LIBRARY(couchbase_libevent SHARED plugin-libevent.c)
+-    INSTALL(TARGETS couchbase_libevent LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
++    INSTALL(TARGETS couchbase_libevent LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/libcouchbase")
+     TARGET_LINK_LIBRARIES(couchbase_libevent ${LIBEVENT_LIBRARIES})
+ ENDIF()
+ 
+diff --git a/plugins/io/libuv/CMakeLists.txt b/plugins/io/libuv/CMakeLists.txt
+index 2492a835..86f31687 100644
+--- a/plugins/io/libuv/CMakeLists.txt
++++ b/plugins/io/libuv/CMakeLists.txt
+@@ -38,5 +38,5 @@ INCLUDE_DIRECTORIES(AFTER ${LIBUV_INCLUDE_DIR})
+ ADD_DEFINITIONS(-DLIBCOUCHBASE_INTERNAL=1)
+ INSTALL(TARGETS
+     couchbase_libuv
+-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/libcouchbase"
+     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+-- 
+2.13.5
+

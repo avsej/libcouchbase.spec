@@ -15,7 +15,8 @@ Recommends: %{name}-libevent%{_isa} = %{version}-%{release}
 Suggests: %{name}-libev%{_isa} = %{version}-%{release}
 Suggests: %{name}-tools%{_isa} = %{version}-%{release}
 
-Patch0: f21-enforce-system-crypto-policies.patch
+Patch0: 0001-enforce-system-crypto-policies.patch
+Patch1: 0002-do-not-install-plugins-into-libdir.patch
 
 %description
 This package provides the core for libcouchbase. It contains an IO
@@ -75,13 +76,13 @@ make test
 %license LICENSE
 
 %files libevent
-%{_libdir}/%{name}_libevent.so
+%{_libdir}/%{name}/%{name}_libevent.so
 
 %files libev
-%{_libdir}/%{name}_libev.so
+%{_libdir}/%{name}/%{name}_libev.so
 
 %files libuv
-%{_libdir}/%{name}_libuv.so
+%{_libdir}/%{name}/%{name}_libuv.so
 
 %files tools
 %{_bindir}/cbc*

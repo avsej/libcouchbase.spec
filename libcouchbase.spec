@@ -6,6 +6,7 @@ License: ASL 2.0
 BuildRequires: gcc, gcc-c++
 BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(libevent) >= 2
+BuildRequires: pkgconfig(libuv) >= 1
 BuildRequires: libev-devel >= 3
 BuildRequires: openssl-devel
 URL: https://developer.couchbase.com/server/other-products/release-notes-archives/c-sdk
@@ -27,13 +28,19 @@ possible to integrate another IO back-end or write your own.
 Summary: Couchbase client library - libevent IO back-end
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description libevent
-This package provides libevent back-end for libcouchbase
+This package provides libevent back-end for libcouchbase.
 
 %package libev
 Summary: Couchbase client library - libev IO back-end
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description libev
-This package provides libev back-end for libcouchbase
+This package provides libev back-end for libcouchbase.
+
+%package libuv
+Summary: Couchbase client library - libuv IO back-end
+Requires: %{name}%{?_isa} = %{version}-%{release}
+%description libuv
+This package provides libuv back-end for libcouchbase.
 
 %package tools
 Summary: Couchbase client tools
@@ -46,12 +53,12 @@ This is the CLI tools Couchbase project.
 Summary: Couchbase client library - Header files
 Requires: %{name}%{?_isa} = %{version}-%{release}
 %description devel
-Development files for the Couchbase Client & Protocol Library
+Development files for the Couchbase client Library.
 
 %prep
 %autosetup -p1
 
-%cmake -DLCB_NO_MOCK=1 -DLCB_BUILD_LIBUV=OFF
+%cmake -DLCB_NO_MOCK=1
 
 %make_build
 %make_install
@@ -72,6 +79,9 @@ make test
 
 %files libev
 %{_libdir}/%{name}_libev.so
+
+%files libuv
+%{_libdir}/%{name}_libuv.so
 
 %files tools
 %{_bindir}/cbc*

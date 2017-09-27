@@ -11,12 +11,15 @@ BuildRequires: libev-devel >= 3
 BuildRequires: openssl-devel
 URL: https://developer.couchbase.com/server/other-products/release-notes-archives/c-sdk
 Source: https://packages.couchbase.com/clients/c/%{name}-%{version}.tar.gz
+%if 0%{?fedora} >= 21
 Recommends: %{name}-libevent%{_isa} = %{version}-%{release}
 Suggests: %{name}-libev%{_isa} = %{version}-%{release}
 Suggests: %{name}-tools%{_isa} = %{version}-%{release}
+%endif
 
 Patch0: 0001-enforce-system-crypto-policies.patch
 Patch1: 0002-do-not-install-plugins-into-libdir.patch
+Patch2: 0003-fix-pkgconfig-paths.patch
 
 %description
 This package provides the core for libcouchbase. It contains an IO
@@ -76,6 +79,8 @@ make test
 %{_libdir}/%{name}.so.*
 %doc README.markdown RELEASE_NOTES.markdown
 %license LICENSE
+%{_libdir}/%{name}
+%exclude %{_libdir}/%{name}/*
 
 %files libevent
 %{_libdir}/%{name}/%{name}_libevent.so

@@ -1,0 +1,28 @@
+From 8355c1d68e8825e4aa006418ccd91eadbac6c02a Mon Sep 17 00:00:00 2001
+From: Sergey Avseyev <sergey.avseyev@gmail.com>
+Date: Wed, 27 Sep 2017 12:30:44 +0300
+Subject: [PATCH] Fix pkgconfig paths
+
+Change-Id: I8459fc3d602266dd7bb9791f05f235da9308c562
+---
+ packaging/libcouchbase.pc.in | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/packaging/libcouchbase.pc.in b/packaging/libcouchbase.pc.in
+index 94820a65..c7171fcf 100644
+--- a/packaging/libcouchbase.pc.in
++++ b/packaging/libcouchbase.pc.in
+@@ -1,7 +1,7 @@
+ prefix=@CMAKE_INSTALL_PREFIX@
+-exec_prefix=${prefix}/@CMAKE_INSTALL_BINDIR@
+-includedir=${prefix}/include
+-libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
++exec_prefix=@CMAKE_INSTALL_PREFIX@
++includedir=@CMAKE_INSTALL_PREFIX@/include
++libdir=@CMAKE_INSTALL_LIBDIR@
+ 
+ Name: libcouchbase @LCB_VERSION@
+ Description: Couchbase client library
+-- 
+2.13.5
+

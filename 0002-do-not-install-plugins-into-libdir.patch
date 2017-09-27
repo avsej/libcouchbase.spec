@@ -3,7 +3,6 @@ From: Sergey Avseyev <sergey.avseyev@gmail.com>
 Date: Wed, 27 Sep 2017 02:04:00 +0300
 Subject: [PATCH] Do not install plugins into libdir
 
-Change-Id: I7b669f745ef3b9de8d3874ec160cb070b8c84022
 ---
  cmake/config-cmake.h.in            | 2 +-
  plugins/io/libev/CMakeLists.txt    | 2 +-

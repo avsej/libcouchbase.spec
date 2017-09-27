@@ -11,7 +11,7 @@ BuildRequires: libev-devel >= 3
 BuildRequires: openssl-devel
 URL: https://developer.couchbase.com/server/other-products/release-notes-archives/c-sdk
 Source: https://packages.couchbase.com/clients/c/%{name}-%{version}.tar.gz
-%if 0%{?fedora} >= 21
+%if 0%{?rhel} && 0%{?rhel} <= 7
 Recommends: %{name}-libevent%{_isa} = %{version}-%{release}
 Suggests: %{name}-libev%{_isa} = %{version}-%{release}
 Suggests: %{name}-tools%{_isa} = %{version}-%{release}
@@ -79,8 +79,7 @@ make test
 %{_libdir}/%{name}.so.*
 %doc README.markdown RELEASE_NOTES.markdown
 %license LICENSE
-%{_libdir}/%{name}
-%exclude %{_libdir}/%{name}/*
+%dir %{_libdir}/%{name}
 
 %files libevent
 %{_libdir}/%{name}/%{name}_libevent.so

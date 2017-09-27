@@ -1,26 +1,26 @@
-From d14ad098d08cc8f6f7a3c1164fa5cdaae96186bf Mon Sep 17 00:00:00 2001
+From bc5b9aecd78fe638f50dbe104fc83a67d87c0615 Mon Sep 17 00:00:00 2001
 From: Sergey Avseyev <sergey.avseyev@gmail.com>
 Date: Tue, 26 Sep 2017 19:26:02 +0300
 Subject: [PATCH] Enforce system crypto policies
 
-Change-Id: I442717b10611ea429158e4d69a885f7d894673ce
 ---
- src/ssl/ssl_common.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ src/ssl/ssl_common.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/src/ssl/ssl_common.c b/src/ssl/ssl_common.c
-index b752b5d2..892817e2 100644
+index b752b5d2..8a615cfd 100644
 --- a/src/ssl/ssl_common.c
 +++ b/src/ssl/ssl_common.c
-@@ -277,7 +277,7 @@ lcbio_ssl_new(const char *cafile, int noverify, lcb_error_t *errp,
+@@ -277,8 +277,7 @@ lcbio_ssl_new(const char *cafile, int noverify, lcb_error_t *errp,
          goto GT_ERR;
  
      }
 -    SSL_CTX_set_cipher_list(ret->ctx, "DHE-RSA-AES256-SHA:DHE-DSS-AES256-SHA:AES256-SHA:EDH-RSA-DES-CBC3-SHA:EDH-DSS-DES-CBC3-SHA:DES-CBC3-SHA:DES-CBC3-MD5:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA:AES128-SHA:DHE-RSA-SEED-SHA:DHE-DSS-SEED-SHA:SEED-SHA:RC2-CBC-MD5:RC4-SHA:RC4-MD5:RC4-MD5:EDH-RSA-DES-CBC-SHA:EDH-DSS-DES-CBC-SHA:DES-CBC-SHA:DES-CBC-MD5:EXP-EDH-RSA-DES-CBC-SHA:EXP-EDH-DSS-DES-CBC-SHA:EXP-DES-CBC-SHA:EXP-RC2-CBC-MD5:EXP-RC2-CBC-MD5:EXP-RC4-MD5:EXP-RC4-MD5");
+-//    SSL_CTX_set_cipher_list(ret->ctx, "!NULL");
 +    SSL_CTX_set_cipher_list(ret->ctx, "PROFILE=SYSTEM");
- //    SSL_CTX_set_cipher_list(ret->ctx, "!NULL");
  
      if (cafile) {
+         if (!SSL_CTX_load_verify_locations(ret->ctx, cafile, NULL)) {
 -- 
 2.13.5
 

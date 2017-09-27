@@ -58,10 +58,12 @@ Development files for the Couchbase client Library.
 
 %prep
 %autosetup -p1
-
 %cmake -DLCB_NO_MOCK=1
 
+%build
 %make_build
+
+%install
 %make_install
 
 %check

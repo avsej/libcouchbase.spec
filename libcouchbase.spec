@@ -1,4 +1,4 @@
-Summary: Couchbase client library
+Summary: Client and protocol library for the Couchbase project
 Name: libcouchbase
 Version: 2.8.1
 Release: 1%{?dist}
@@ -49,7 +49,7 @@ This package provides libuv back-end for libcouchbase.
 %package tools
 Summary: Couchbase client tools
 Requires: %{name}%{?_isa} = %{version}-%{release}
-Requires: %{name}-libevent%{?_isa}
+Requires: %{name}-libevent%{?_isa} = %{version}-%{release}
 %description tools
 This is the CLI tools Couchbase project.
 

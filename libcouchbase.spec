@@ -1,6 +1,6 @@
 Summary: Client and protocol library for the Couchbase project
 Name: libcouchbase
-Version: 2.8.1
+Version: 2.8.2
 Release: 1%{?dist}
 License: ASL 2.0
 BuildRequires: gcc, gcc-c++
@@ -101,5 +101,8 @@ make test
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Wed Oct 18 2017 Sergey Avseyev <sergey.avseyev@gmail.com> - 2.8.2-1
+- Update to 2.8.2
+
 * Tue Sep 26 2017 Sergey Avseyev <sergey.avseyev@gmail.com> - 2.8.1-1
 - Initial package
